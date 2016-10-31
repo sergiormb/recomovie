@@ -27,16 +27,17 @@ class ImdbApi(object):
         url = settings.THE_MOVIE_DB_CONFIG_PATTERN.format(key=self.the_movie_db_key)
         r = requests.get(url)
         config = r.json()
-        self.base_url = config['images']['base_url']
-        sizes = config['images']['poster_sizes']
-        """
-            'sizes' should be sorted in ascending order, so
-            max_size = sizes[-1]
-            should get the largest size as well.
-        """
-        self.max_size_poster = max(sizes[2:4], key=size_str_to_int)
-        self.max_size_photos = max(sizes[2:5], key=size_str_to_int)
-        self.max_size_cast = max(sizes[1:2], key=size_str_to_int)
+        if config.get('images', ''):
+            self.base_url = config['images']['base_url']
+            sizes = config['images']['poster_sizes']
+            """
+                'sizes' should be sorted in ascending order, so
+                max_size = sizes[-1]
+                should get the largest size as well.
+            """
+            self.max_size_poster = max(sizes[2:4], key=size_str_to_int)
+            self.max_size_photos = max(sizes[2:5], key=size_str_to_int)
+            self.max_size_cast = max(sizes[1:2], key=size_str_to_int)
 
     def get_movie_video(self, imdb_id):
         response = requests.get(settings.VIDEO_URL.format(key=self.the_movie_db_key, imdbid=imdb_id))
