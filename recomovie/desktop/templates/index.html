@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block movies %}
+{% for movie in list_movies %}
+<article>
+  <a class="thumbnail" href="{{movie.images.1}}" data-position="left center"><img src="{{movie.poster}}" alt="" /></a>
+  <h2>{{movie.title|title}} </h2>
+  {% if movie.trailer %}
+   <iframe style="padding: 20px;" align="right" width="460" height="315" src="http://www.youtube.com/embed/{{movie.trailer}}" allowfullscreen=""></iframe>
+   {% endif %}
+   <p align="justify">{{movie.description}}</p>
+
+</article>
+{% endfor %}
+{% endblock %}
