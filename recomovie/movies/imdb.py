@@ -102,10 +102,11 @@ class ImdbApi(object):
                 title=movie_result['title'].encode("utf-8"),
                 description=movie_result['overview'].encode("utf-8"),
                 imdb_rating=movie_result['popularity'],
-                poster=movie_result['images']['poster'],
                 trailer=movie_result.get('trailer', None),
-                images=movie_result['images']['photos']
             )
+            if movie_result.get('images', ''):
+                movie.poster = movie_result['images']['poster']
+                movie_result['images']['photos']
             if movie.title not in titles_movies:
                 movies.append(movie)
                 titles_movies.append(movie.title)
