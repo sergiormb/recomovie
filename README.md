@@ -2,6 +2,7 @@ Recomovie
 =================
 
 [![Build Status](https://travis-ci.org/sergiormb/recomovie.svg?branch=master)](https://travis-ci.org/sergiormb/recomovie)
+[![Coverage Status](https://coveralls.io/repos/github/sergiormb/recomovie/badge.svg?branch=master)](https://coveralls.io/github/sergiormb/recomovie?branch=master)
 
 This is an application created with the Django framework with the motive to keep learning new things. If you visit the application, it will recommend movies at random according valuations IMDB, Netflix, etc. It features:
 
