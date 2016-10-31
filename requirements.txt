@@ -25,3 +25,5 @@ virtualenv==15.0.3
 wcwidth==0.1.7
 whitenoise==3.2
 psycopg2==2.6.2
+coverage==3.7.1
+coveralls==1.1
