@@ -93,24 +93,25 @@ class ImdbApi(object):
     def get_random_top_250(self, number=1):
         response = requests.get(settings.DISCOVER_URL.format(key=self.the_movie_db_key))
         api_response = response.json()
-        results = api_response['results']
+        results = api_response.get('results', '')
         movies = []
-        titles_movies = []
-        while (len(movies) < number):
-            movie_result = random.choice(results)
-            movie_result = self.get_movie_complete(movie_result)
-            movie = Movie(
-                title=movie_result['title'].encode("utf-8"),
-                description=movie_result['overview'].encode("utf-8"),
-                imdb_rating=movie_result['popularity'],
-                trailer=movie_result.get('trailer', None),
-            )
-            if movie_result.get('images', ''):
-                movie.poster = movie_result['images']['poster']
-                movie_result['images']['photos']
-            if movie.title not in titles_movies:
-                movies.append(movie)
-                titles_movies.append(movie.title)
+        if results:
+            titles_movies = []
+            while (len(movies) < number):
+                movie_result = random.choice(results)
+                movie_result = self.get_movie_complete(movie_result)
+                movie = Movie(
+                    title=movie_result['title'].encode("utf-8"),
+                    description=movie_result['overview'].encode("utf-8"),
+                    imdb_rating=movie_result['popularity'],
+                    trailer=movie_result.get('trailer', None),
+                )
+                if movie_result.get('images', ''):
+                    movie.poster = movie_result['images']['poster']
+                    movie_result['images']['photos']
+                if movie.title not in titles_movies:
+                    movies.append(movie)
+                    titles_movies.append(movie.title)
         return movies
 
     def get_random_genre(self, genre):
