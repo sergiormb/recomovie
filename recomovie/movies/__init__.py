@@ -23,6 +23,7 @@ class Movie(object):
                 imdb_average=None,
                 netflix_average=None,
                 netflix_url=None,
+                tomatoes_average=None,
                 images=[]
                 ):
 
@@ -37,6 +38,7 @@ class Movie(object):
         self.images = images
         self.netflix_average = netflix_average
         self.netflix_url = netflix_url
+        self.tomatoes_average = tomatoes_average
 
         super(Movie, self).__init__()
 
@@ -48,6 +50,7 @@ def get_list_movies(number):
         if movie.imdb_id:
             movie_imdb = get_movie_imdb(movie.imdb_id)
             movie.imdb_average = movie_imdb.imdb_rating
+            movie.tomatoes_average = movie_imdb.tomato_rating
             movie_netflix = get_movie_netflix(movie_imdb.title)
             if movie_netflix.is_on_netflix:
                 movie.netflix_average = movie_netflix.rating
