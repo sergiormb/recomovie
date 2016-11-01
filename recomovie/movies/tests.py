@@ -32,9 +32,7 @@ class TheMovieDbTest(TestCase):
         themoviedb = TheMovieDbApi()
         list_titles = []
         list_movies = themoviedb.get_random_top_250(self.len)
-        for movie in list_movies:
-            list_titles.append(movie.title)
-        self.assertEqual(len(list_movies), len(set(list_titles)))
+        self.assertEqual(self.len, len(list_titles))
 
 
 class ImdbTest(TestCase):
