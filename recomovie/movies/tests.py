@@ -30,9 +30,8 @@ class TheMovieDbTest(TestCase):
         repetida en la lista aleatoria de peliculas.
         """
         themoviedb = TheMovieDbApi()
-        list_titles = []
         list_movies = themoviedb.get_random_top_250(self.len)
-        self.assertEqual(self.len, len(list_titles))
+        self.assertEqual(self.len, len(list_movies))
 
 
 class ImdbTest(TestCase):
