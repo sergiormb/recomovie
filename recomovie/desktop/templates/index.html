@@ -11,14 +11,16 @@
    <p align="justify">{{movie.description}}</p>
    <table style="width:100%;">
      <tr>
-       <td><img align="left" src="{% static 'img/imdb.png' %}" style="vertical-align: middle;padding-right: 20px; width: 100px;"><h2>{{movie.imdb_average}}/10</h2></td>
-    <td><img align="left" src="{% static 'img/themoviedb.png' %}" style="vertical-align: middle;padding-right: 20px;"> <h2>{{movie.themoviedb_average}}/10</h2></td>
+       <td><img align="left" src="{% static 'img/imdb.png' %}" style="vertical-align: middle;padding-right: 20px; width: 100px;"><h4>Calificación en IMDB: </h4><h2>{{movie.imdb_average}}/10</h2></td>
+    <td><img align="left" src="{% static 'img/themoviedb.png' %}" style="vertical-align: middle;padding-right: 20px;"> <h4>Calificación en The Movie DB: </h4><h2>{{movie.themoviedb_average}}/10</h2></td>
     {% if movie.tomatoes_average %}
-        <td><img align="left" src="{% static 'img/rottentomatoes.png' %}" style="vertical-align: middle;padding-right: 20px;  width: 100px;"> <h2>{{movie.tomatoes_average}}/10</h2></td>
+        <td><img align="left" src="{% static 'img/rottentomatoes.png' %}" style="vertical-align: middle;padding-right: 20px;  width: 100px;"> <h4>Calificación en Rotten Tomatoes: </h4> <h2>{{movie.tomatoes_average}}/10</h2></td>
     {% endif %}
-
+    {% if movie.filmaffinity_average %}
+        <td><img align="left" src="{% static 'img/filmaffinity.png' %}" style="vertical-align: middle;padding-right: 20px;  width: 100px;"> <h4>Calificación en Filmaffinity: </h4> <h2>{{movie.filmaffinity_average}}/10</h2></td>
+    {% endif %}
 {% if movie.netflix_average %}
-    <td><img align="left" src="{% static 'img/netflix.png' %}" style="vertical-align: middle;padding-right: 20px;  width: 100px;"> <h2>{{movie.netflix_average}}/5</h2><a href="{{movie.netflix_url}}" target="_blank"><p>Ver película</p></a></td>
+    <td><img align="left" src="{% static 'img/netflix.png' %}" style="vertical-align: middle;padding-right: 20px;  width: 100px;"><h4>Calificación en Netflix: </h4> <h2>{{movie.netflix_average}}/5</h2><a href="{{movie.netflix_url}}" target="_blank"><p>Ver película</p></a></td>
 {% endif %}
   </tr>
 </table>
