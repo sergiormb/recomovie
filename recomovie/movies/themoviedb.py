@@ -13,12 +13,12 @@ def size_str_to_int(x):
     return float("inf") if x == 'original' else int(x[1:])
 
 
-class ImdbApi(object):
+class TheMovieDbApi(object):
 
     def __init__(self, api_key=None, locale=None, anonymize=True,
                  exclude_episodes=None, user_agent=None, cache=None,
                  proxy_uri=None, verify_ssl=None):
-        super(ImdbApi, self).__init__()
+        super(TheMovieDbApi, self).__init__()
         self.locale = 'es_ES'
         self.caching_enabled = True
         self.anonymize = True
@@ -36,7 +36,6 @@ class ImdbApi(object):
                 should get the largest size as well.
             """
             self.max_size_poster = max(sizes[2:4], key=size_str_to_int)
-            self.max_size_photos = max(sizes[2:5], key=size_str_to_int)
             self.max_size_cast = max(sizes[1:2], key=size_str_to_int)
 
     def get_movie_video(self, imdb_id):
@@ -75,16 +74,16 @@ class ImdbApi(object):
         if api_backdrops:
             backdrops = api_backdrops
             backdrops_urls = []
-            for backdrop in backdrops[:8]:
-                rel_path = backdrop['file_path']
-                url = "{0}{1}{2}".format(self.base_url, self.max_size_photos, rel_path)
-                backdrops_urls.append(url)
-            images_movie['photos'] = backdrops_urls
+            backdrop = backdrops[0]
+            rel_path = backdrop['file_path']
+            width = 'w' + str(backdrop['width'])
+            url = "{0}{1}{2}".format(self.base_url, width, rel_path)
+            images_movie['photo'] = url
         return images_movie
 
     def get_movie_complete(self, movie):
         movie['images'] = self.get_movie_images(movie['id'])
-        # movie['cast'] = self.get_movie_cast(movie['id'])
+        movie['cast'] = self.get_movie_cast(movie['id'])
         trailer = self.get_movie_video(movie['id'])
         if trailer:
             movie['trailer'] = trailer
@@ -103,12 +102,13 @@ class ImdbApi(object):
                 movie = Movie(
                     title=movie_result['title'].encode("utf-8"),
                     description=movie_result['overview'].encode("utf-8"),
-                    imdb_rating=movie_result['popularity'],
+                    themoviedb_average=movie_result['vote_average'],
                     trailer=movie_result.get('trailer', None),
+                    imdb_id=movie_result['id'],
                 )
                 if movie_result.get('images', ''):
                     movie.poster = movie_result['images']['poster']
-                    movie_result['images']['photos']
+                    movie.photo = movie_result['images']['photo']
                 if movie.title not in titles_movies:
                     movies.append(movie)
                     titles_movies.append(movie.title)

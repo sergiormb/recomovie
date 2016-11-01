@@ -148,6 +148,7 @@ BOWER_INSTALLED_APPS = (
 
 ###### URLS API ######
 
+# THE MOVIE DB ########
 THE_MOVIE_DB_CONFIG_PATTERN = 'http://api.themoviedb.org/3/configuration?api_key={key}'
 
 # URL IMAGES, POSTER AND PHOTOS

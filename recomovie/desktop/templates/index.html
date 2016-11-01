@@ -3,13 +3,18 @@
 {% block movies %}
 {% for movie in list_movies %}
 <article>
-  <a class="thumbnail" href="{{movie.images.1}}" data-position="left center"><img src="{{movie.poster}}" alt="" /></a>
+  <a class="thumbnail" href="{{movie.photo}}" data-position="left center"><img src="{{movie.poster}}" alt="" /></a>
   <h2>{{movie.title|title}} </h2>
   {% if movie.trailer %}
-   <iframe style="padding: 20px;" align="right" width="460" height="315" src="http://www.youtube.com/embed/{{movie.trailer}}" allowfullscreen=""></iframe>
+   <iframe style="padding: 20px;" align="right" width="460" height="315" src="https://www.youtube.com/embed/{{movie.trailer}}" allowfullscreen=""></iframe>
    {% endif %}
    <p align="justify">{{movie.description}}</p>
-
+   <table style="width:100%;">
+     <tr>
+       <td><img align="left" src="{% static 'img/imdb.png' %}" style="vertical-align: middle;padding-right: 20px;"><h2>Sin nota</h2></td>
+    <td><img align="left" src="{% static 'img/themoviedb.png' %}" style="vertical-align: middle;padding-right: 20px;"> <h2>{{movie.themoviedb_average}}</h2></td>
+  </tr>
+</table>
 </article>
 {% endfor %}
 {% endblock %}
