@@ -1,25 +1,21 @@
 # -*- coding: utf-8 -*-
-'''
-    File name: test.py
-    Author: Peter Test
-    Date created: 4/20/2013
-    Date last modified: 4/25/2013
-    Python Version: 2.7
-'''
+# Desarrollado por Sergio Pino Márquez
+# 2016 email: sergiormb88@gmail.com
 
 from django.test import TestCase
 from recomovie.movies.themoviedb import TheMovieDbApi
+from recomovie.movies.imdb import get_average_imdb
 
 
 class TheMovieDbTest(TestCase):
     """Comprobamos que la API de TheMovieDb funciona correctamente."""
 
     def setUp(self):
-        """Prueba de la longitud de la lista aleatoria de peliculas."""
+        """Establece la longitud de la lista aleatoria de peliculas."""
         self.len = 6
 
     def tearDown(self):
-        """Prueba de la longitud de la lista aleatoria de peliculas."""
+        """Borra la longitud de la lista."""
         del self.len
 
     def test_len_random_top(self):
@@ -39,3 +35,12 @@ class TheMovieDbTest(TestCase):
         for movie in list_movies:
             list_titles.append(movie.title)
         self.assertEqual(len(list_movies), len(set(list_titles)))
+
+
+class ImdbTest(TestCase):
+    """Comprobamos que la API de imdb funciona correctamente."""
+
+    def test_imdb_api(self):
+        """Prueba de la longitud de la lista aleatoria de peliculas."""
+        movie_average = get_average_imdb('tt0137523')
+        assert float(movie_average)

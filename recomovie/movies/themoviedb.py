@@ -106,7 +106,7 @@ class TheMovieDbApi(object):
                         )
                     )
                 movie_complete = response.json()
-                if movie_complete:
+                if movie_complete.get('imdb_id', None):
                     movie.imdb_id = movie_complete['imdb_id']
                 if movie.title not in titles_movies:
                     movies.append(movie)

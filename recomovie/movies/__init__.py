@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Desarrollado por Sergio Pino Márquez
-# 2015 email: sergiormb88@gmail.com
+# 2016 email: sergiormb88@gmail.com
 from recomovie.movies.imdb import get_average_imdb
 
 
