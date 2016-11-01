@@ -1,8 +1,5 @@
-from NetflixRoulette import *
+import netflix_roulette
 
 def get_movie_netflix(title):
-    try:
-        movie = get_all_data(title)
-        return movie
-    except:
-        return None
+    movie = netflix_roulette.NetflixMedia(title)
+    return movie

@@ -49,7 +49,7 @@ def get_list_movies(number):
             movie_imdb = get_movie_imdb(movie.imdb_id)
             movie.imdb_average = movie_imdb.imdb_rating
             movie_netflix = get_movie_netflix(movie_imdb.title)
-            if movie_netflix:
-                movie.netflix_average = movie_netflix['rating']
-                movie.netflix_url = settings.NETFLIX_URL.format(show_id=movie_netflix['show_id'])
+            if movie_netflix.is_on_netflix:
+                movie.netflix_average = movie_netflix.rating
+                movie.netflix_url = settings.NETFLIX_URL.format(show_id=movie_netflix.show_id)
     return list_movies
