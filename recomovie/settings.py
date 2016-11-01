@@ -172,6 +172,8 @@ VIDEO_URL = 'http://api.themoviedb.org/3/movie/{movie_id}/videos?language=es-ES&
 GENRE_LIST_URL = 'http://api.themoviedb.org/3/genre/movie/list?api_key={key}&language=es-ES'
 GENRE_URL = 'http://api.themoviedb.org/3/discover/movie?language=es-ES&with_genres={genre}&api_key={key}'
 
+NETFLIX_URL = 'https://www.netflix.com/watch/{show_id}'
+
 # Heroku configuration
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 

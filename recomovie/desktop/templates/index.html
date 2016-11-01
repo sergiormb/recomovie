@@ -11,8 +11,11 @@
    <p align="justify">{{movie.description}}</p>
    <table style="width:100%;">
      <tr>
-       <td><img align="left" src="{% static 'img/imdb.png' %}" style="vertical-align: middle;padding-right: 20px;"><h2>{{movie.imdb_average}}/10</h2></td>
+       <td><img align="left" src="{% static 'img/imdb.png' %}" style="vertical-align: middle;padding-right: 20px; width: 100px;"><h2>{{movie.imdb_average}}/10</h2></td>
     <td><img align="left" src="{% static 'img/themoviedb.png' %}" style="vertical-align: middle;padding-right: 20px;"> <h2>{{movie.themoviedb_average}}/10</h2></td>
+{% if movie.netflix_average %}
+    <td><img align="left" src="{% static 'img/netflix.png' %}" style="vertical-align: middle;padding-right: 20px;  width: 100px;"> <h2>{{movie.netflix_average}}/5</h2><a href="{{movie.netflix_url}}" target="_blank"><p>Ver película</p></a></td>
+{% endif %}
   </tr>
 </table>
 </article>
