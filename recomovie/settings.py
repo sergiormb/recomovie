@@ -152,21 +152,21 @@ BOWER_INSTALLED_APPS = (
 THE_MOVIE_DB_CONFIG_PATTERN = 'http://api.themoviedb.org/3/configuration?api_key={key}'
 
 # URL IMAGES, POSTER AND PHOTOS
-IMG_PATTERN = 'http://api.themoviedb.org/3/movie/{imdbid}/images?api_key={key}'
-IMG_PATTERN_ES = 'http://api.themoviedb.org/3/movie/{imdbid}/images?api_key={key}&language=es-ES'
+IMG_PATTERN = 'http://api.themoviedb.org/3/movie/{movie_id}/images?api_key={key}'
+IMG_PATTERN_ES = 'http://api.themoviedb.org/3/movie/{movie_id}/images?api_key={key}&language=es-ES'
 
 # URL MOVIE
-MOVIE_PATTERN = 'http://api.themoviedb.org/3/movie/{imdbid}/?api_key={key}'
+MOVIE_PATTERN = 'http://api.themoviedb.org/3/movie/{movie_id}?api_key={key}'
 
 # URL DISCOVER MOVIE
 DISCOVER_URL = 'http://api.themoviedb.org/3/movie/top_rated?language=es-ES&api_key={key}'
 
 # URL CAST
-PERSON_URL = 'http://api.themoviedb.org/3/person/{imdbid}/images?api_key={key}'
-CREDITS_URL = 'http://api.themoviedb.org/3/movie/{imdbid}/credits?api_key={key}'
+PERSON_URL = 'http://api.themoviedb.org/3/person/{movie_id}/images?api_key={key}'
+CREDITS_URL = 'http://api.themoviedb.org/3/movie/{movie_id}/credits?api_key={key}'
 
 # URL VIDEO YOUTUBE
-VIDEO_URL = 'http://api.themoviedb.org/3/movie/{imdbid}/videos?language=es-ES&api_key={key}'
+VIDEO_URL = 'http://api.themoviedb.org/3/movie/{movie_id}/videos?language=es-ES&api_key={key}'
 
 # URL GENRES
 GENRE_LIST_URL = 'http://api.themoviedb.org/3/genre/movie/list?api_key={key}&language=es-ES'

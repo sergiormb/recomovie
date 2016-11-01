@@ -36,10 +36,9 @@ class TheMovieDbApi(object):
                 should get the largest size as well.
             """
             self.max_size_poster = max(sizes[2:4], key=size_str_to_int)
-            self.max_size_cast = max(sizes[1:2], key=size_str_to_int)
 
-    def get_movie_video(self, imdb_id):
-        response = requests.get(settings.VIDEO_URL.format(key=self.the_movie_db_key, imdbid=imdb_id))
+    def get_movie_video(self, movie_id):
+        response = requests.get(settings.VIDEO_URL.format(key=self.the_movie_db_key, movie_id=movie_id))
         api_response = response.json()
         results = api_response.get('results', None)
         if results:
@@ -49,16 +48,8 @@ class TheMovieDbApi(object):
         else:
             return None
 
-    def get_movie_cast(self, imdb_id):
-        response = requests.get(settings.CREDITS_URL.format(key=self.the_movie_db_key, imdbid=imdb_id))
-        api_response = response.json()
-        cast = api_response['cast']
-        for actor in cast[:4]:
-            actor['url_image'] = "{0}{1}{2}".format(self.base_url, self.max_size_cast, actor['profile_path'])
-        return cast[:4]
-
-    def get_movie_images(self, imdb_id):
-        response = requests.get(settings.IMG_PATTERN.format(key=self.the_movie_db_key, imdbid=imdb_id))
+    def get_movie_images(self, movie_id):
+        response = requests.get(settings.IMG_PATTERN.format(key=self.the_movie_db_key, movie_id=movie_id))
         api_response = response.json()
         images_movie = {}
         # POSTER
@@ -83,7 +74,6 @@ class TheMovieDbApi(object):
 
     def get_movie_complete(self, movie):
         movie['images'] = self.get_movie_images(movie['id'])
-        movie['cast'] = self.get_movie_cast(movie['id'])
         trailer = self.get_movie_video(movie['id'])
         if trailer:
             movie['trailer'] = trailer
@@ -104,11 +94,20 @@ class TheMovieDbApi(object):
                     description=movie_result['overview'].encode("utf-8"),
                     themoviedb_average=movie_result['vote_average'],
                     trailer=movie_result.get('trailer', None),
-                    imdb_id=movie_result['id'],
+                    themoviedb_id=movie_result['id'],
                 )
                 if movie_result.get('images', ''):
                     movie.poster = movie_result['images']['poster']
                     movie.photo = movie_result['images']['photo']
+                response = requests.get(
+                    settings.MOVIE_PATTERN.format(
+                        key=self.the_movie_db_key,
+                        movie_id=movie.themoviedb_id
+                        )
+                    )
+                movie_complete = response.json()
+                if movie_complete:
+                    movie.imdb_id = movie_complete['imdb_id']
                 if movie.title not in titles_movies:
                     movies.append(movie)
                     titles_movies.append(movie.title)
