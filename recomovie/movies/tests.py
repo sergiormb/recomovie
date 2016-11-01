@@ -8,11 +8,11 @@
 '''
 
 from django.test import TestCase
-from recomovie.movies.imdb import ImdbApi
+from recomovie.movies.themoviedb import TheMovieDbApi
 
 
-class ImdbTest(TestCase):
-    """Comprobamos que la API de IMDB funciona correctamente."""
+class TheMovieDbTest(TestCase):
+    """Comprobamos que la API de TheMovieDb funciona correctamente."""
 
     def setUp(self):
         """Prueba de la longitud de la lista aleatoria de peliculas."""
@@ -24,8 +24,8 @@ class ImdbTest(TestCase):
 
     def test_len_random_top(self):
         """Prueba de la longitud de la lista aleatoria de peliculas."""
-        imdb = ImdbApi()
-        list_movies = imdb.get_random_top_250(self.len)
+        themoviedb = TheMovieDbApi()
+        list_movies = themoviedb.get_random_top_250(self.len)
         self.assertEqual(len(list_movies), self.len)
 
     def test_repeat_random_top(self):
@@ -33,9 +33,9 @@ class ImdbTest(TestCase):
 
         repetida en la lista aleatoria de peliculas.
         """
-        imdb = ImdbApi()
+        themoviedb = TheMovieDbApi()
         list_titles = []
-        list_movies = imdb.get_random_top_250(self.len)
+        list_movies = themoviedb.get_random_top_250(self.len)
         for movie in list_movies:
             list_titles.append(movie.title)
         self.assertEqual(len(list_movies), len(set(list_titles)))
