@@ -80,9 +80,15 @@ class TheMovieDbApi(object):
         return movie
 
     def get_random_top_250(self, number=1):
-        response = requests.get(settings.DISCOVER_URL.format(key=self.the_movie_db_key))
+        response = requests.get(settings.DISCOVER_URL.format(key=self.the_movie_db_key, page=1))
         api_response = response.json()
         results = api_response.get('results', '')
+        response = requests.get(settings.DISCOVER_URL.format(key=self.the_movie_db_key, page=2))
+        api_response = response.json()
+        results = results + api_response.get('results', '')
+        response = requests.get(settings.DISCOVER_URL.format(key=self.the_movie_db_key, page=3))
+        api_response = response.json()
+        results = results + api_response.get('results', '')
         movies = []
         if results:
             titles_movies = []

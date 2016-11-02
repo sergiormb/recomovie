@@ -159,7 +159,7 @@ IMG_PATTERN_ES = 'http://api.themoviedb.org/3/movie/{movie_id}/images?api_key={k
 MOVIE_PATTERN = 'http://api.themoviedb.org/3/movie/{movie_id}?api_key={key}'
 
 # URL DISCOVER MOVIE
-DISCOVER_URL = 'http://api.themoviedb.org/3/movie/top_rated?language=es-ES&api_key={key}'
+DISCOVER_URL = 'http://api.themoviedb.org/3/movie/top_rated?language=es-ES&api_key={key}&page={page}'
 
 # URL CAST
 PERSON_URL = 'http://api.themoviedb.org/3/person/{movie_id}/images?api_key={key}'

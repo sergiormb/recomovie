@@ -5,7 +5,7 @@ import BeautifulSoup
 import requests
 
 
-def get_average_movie(title):
+def get_average_movie_filmaffinity(title):
     page_results = requests.get('http://www.filmaffinity.com/es/search.php?stext=' + title)
     soup = BeautifulSoup.BeautifulSoup(page_results.content)
     movie = soup.find("div", {"class": 'movie-card movie-card-1'})
@@ -14,5 +14,6 @@ def get_average_movie(title):
         page = requests.get('http://www.filmaffinity.com/es/film' + str(id_film) +'.html')
         soup = BeautifulSoup.BeautifulSoup(page.content)
         average = soup.find("div", {"id":'movie-rat-avg'})
-        return float(average['content'])
+        if average:
+            return float(average['content'])
     return None
