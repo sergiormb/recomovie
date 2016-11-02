@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Desarrollado por Sergio Pino Márquez
 # 2016 email: sergiormb88@gmail.com
-import BeautifulSoup
+from bs4 import BeautifulSoup
 import requests
 
 
