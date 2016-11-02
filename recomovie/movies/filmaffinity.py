@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import requests
 
 
-def get_movie_filmaffinity(title):
+def get_movie_filmaffinity(id_movie):
     page = requests.get('http://www.filmaffinity.com/es/film' + str(id_movie) +'.html')
     soup = BeautifulSoup(page.content, "html.parser")
     average = soup.find("div", {"id": 'movie-rat-avg'})
